@@ -70,6 +70,7 @@ RUN ( \
     echo 'source "/opt/ros/$ROS_DISTRO/setup.bash" --'; \
     echo 'exec "$@"'; \
   ) > /ros_entrypoint.sh
+RUN chmod 755 /ros_entrypoint.sh
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D", "-e", "-f", "/etc/ssh/sshd_config_test_clion"]
 
