@@ -65,6 +65,13 @@ RUN ( \
   && mkdir /run/sshd
 RUN useradd -m user && yes password | passwd user
 RUN usermod -s /bin/bash user
+RUN ( \
+    echo '#!/bin/bash'; \
+    echo 'source "/opt/ros/$ROS_DISTRO/setup.bash" --'; \
+    echo 'exec "$@"'; \
+  ) > /ros_entrypoint.sh
+ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D", "-e", "-f", "/etc/ssh/sshd_config_test_clion"]
+
 
 
