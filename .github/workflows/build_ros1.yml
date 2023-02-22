@@ -17,7 +17,7 @@ jobs:
           export REPO=$(basename $GITHUB_REPOSITORY) &&
           cd $GITHUB_WORKSPACE/.. && mkdir src/ &&
           mv $REPO/ src/ && mkdir $REPO/ && mv src/ $REPO/ && cd $REPO/ &&
-          apt-get install --no-install-recommends -y git nano qemu-user-static binfmt-support coreutils parted wget gdisk e2fsprogs libxml2-utils  && update-binfmts --enable &&
+          sudo apt-get install --no-install-recommends -y git nano qemu-user-static binfmt-support coreutils parted wget gdisk e2fsprogs libxml2-utils  && sudo update-binfmts --enable &&
           docker pull --platform=linux/arm64 ubuntu:20.04 &&
           docker build -t openvins -f $GITHUB_WORKSPACE/src/$REPO/Dockerfile_ros1_20_04 .
       - name: Echo Enviroment
